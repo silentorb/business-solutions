@@ -30,7 +30,7 @@
 
 ### Funding
 
-* The primary problem facing speculative financial involves funding and can be divided into several funding-related sub-problems:
+* The primary problem facing speculative finance revolve around funding and can be divided into several funding-related sub-problems:
   * If a user makes a successful prediction, that user should make a profit
   * The funds for that profit need to come from somewhere, preferrably users who made unsuccessful predictions
   * For decentralized blockchain solutions, debt collection is not an option so any funding needs to be provided up front and readily available
@@ -55,7 +55,7 @@
   * A position betting on a positive vector is a long position
   * A position betting on a negative vector is short position
   * This document will use the terms *positive* and *negative* in place of *long* and *short* because the latter terms have associations and context that does not apply to a CSSP
-  * This document will use the term *position* to refer to outstanding bets because the financial definition of *position* does not contain asscociations foreign to CSSP and is a useful term to carry over from traditional financial platforms
+  * This document will use the term *position* to refer to outstanding bets because the financial definition of *position* does not contain asscociations foreign to CSSP and is a useful term to carry over from traditional financial platforms
 * Since it is measuring a continuous signal, a CSSP periodically samples a signal over time to produce discrete scalar values
 * For each sample, the preceding sample is subtracted from that sample to produce a single-dimensional vector
 * Depending on the direction of each sample's vector, one set of users win the bet for that sample and one set of users lose the bet for that sample
@@ -147,7 +147,7 @@
   * This can be either a fixed number or dynamically calculated by more elaborate systems that analyze historical trends
 * Next, the maximum multiplier for each position is calculated
   * `max_multiplier = collateral / max_magnitude`
-    * Either safe division needs to be applied here or a guarantee that `max_magnitude` is not zero
+    * Either safe division needs to be applied here or a guarantee that `max_magnitude` is not zero
 * Finally the effective multiplier is calculated and updated for each position
   * `new_position_scalar = if (is_new_position) `
     *  `(current_timestamp - position_creation_timestamp) / time_since_last_update`
@@ -178,13 +178,9 @@
 
 ##### Rationing
 
-* If a signal's total adjusted losses are less than its total winnings, the limited funds are distributed across the winning positions, weighted by each position's collateral
-  * Positions with more collateral will receive a higher percentage of their raw winnings
-* The rationing calculations are:
-  * **TODO:** This math needs more work, particularly needing to factor in the ratio of total adjusted losses to total winnings
-  * `total_collateral` = sum of collateral for all winning positions of the signal
-  * For each position of that signal:
-    * `actual_winnings = raw_winnings * collateral / total_collateral`
+* If a signal's total adjusted losses are less than its total winnings, the limited funds are distributed across the winning positions
+* For each position of that signal:
+  * `actual_winnings = raw_winnings * total_adjusted_losses / total_winnings`
 
 ##### Payout
 
@@ -192,7 +188,7 @@
 * For each signal, total losses cannot exceed total winnings
 * Any excess losses remain in the collateral of losing positions
 * The first step in payout is to calculate the actual losses for each losing position
-* **TODO:** Add calculations for the actual losses so they scale down when there are a lower amount of winnings (it will probably be similar to the rationing equation)
+  * `actual_losses = adjusted_losses * min(total_winnings, total_adjusted_losses) / total_adjusted_losses `
 * When a position wins, its winnings are first used to fill its collateral to the the position's maximum collateral value, then any excess winnings are transferred to the user's account balance
   * `collateral_increase = min(max_collateral - collateral, winnings)`
   * `collateral = collateral + collateral_increase`
