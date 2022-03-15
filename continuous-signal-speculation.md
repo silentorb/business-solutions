@@ -196,7 +196,6 @@
 
 ### Inherent Behavior
 
-* A CSSP position can have its collateral completely depleted, enter hibernation, and then have the market turn and earn back all of its collateral and make a profit
 * Unlike traditional financial speculation platforms and betting platforms, a CSSP does not need to explicitly match orders or bets with counter-parties
   * A CSSP user can safely open a position without any counter-positions
     * As long as their are no counter-positions, a position will effectively never experience any wins or losses
