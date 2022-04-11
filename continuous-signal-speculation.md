@@ -13,12 +13,6 @@
 
 ## The Problem
 
-### Overview
-
-* The overarching problem a CSSP is intended to solve can be divided into two sub-problems, a general problem and a specific problem
-* The general problem may be solved in a variety of ways, but this document is focusing on a particular subset of solutions for that general problem
-* That subset of solutions faces its own primary problem, which is summarized in the Funding section
-
 ### The General Problem
 
 * The future is uncertain
@@ -28,21 +22,20 @@
   * Assisting people in making, managing, and applying predictions and integrating those predictions with other predictions (collaborative speculation)
   * Providing shock absorbers to markets and buffering investors from market instability
 
-### Funding
+### The Specific Problem - Funding
 
 * The primary problem facing speculative finance revolve around funding and can be divided into several funding-related sub-problems:
   * If a user makes a successful prediction, that user should make a profit
   * The funds for that profit need to come from somewhere, preferrably users who made unsuccessful predictions
   * For decentralized blockchain solutions, debt collection is not an option so any funding needs to be provided up front and readily available
 
-## Betting
+## The Solution
 
-* To further define the problems and lay the foundation for the solutions, the problem domain will be defined in terms of betting
+### Betting
+
 * At its heart, a speculative financial platform is a betting platform
   * Users bet whether a value will increase or decrease over time
 * A betting platform has winners and losers
-
-## The Solution
 
 ### Continous Signals
 
@@ -55,7 +48,7 @@
   * A position betting on a positive vector is a long position
   * A position betting on a negative vector is short position
   * This document will use the terms *positive* and *negative* in place of *long* and *short* because the latter terms have associations and context that does not apply to a CSSP
-  * This document will use the term *position* to refer to outstanding bets because the financial definition of *position* does not contain asscociations foreign to CSSP and is a useful term to carry over from traditional financial platforms
+  * This document will use the term *position* to refer to outstanding bets because the financial definition of *position* does not contain asscociations foreign to CSSP
 * Since it is measuring a continuous signal, a CSSP periodically samples a signal over time to produce discrete scalar values
 * For each sample, the preceding sample is subtracted from that sample to produce a single-dimensional vector
 * Depending on the direction of each sample's vector, one set of users win the bet for that sample and one set of users lose the bet for that sample
@@ -66,18 +59,9 @@
 ### Positions
 
 * A CSSP user can open any number of positions
-* Each position belongs to a single signal
-* The owner of a position can close a position at any time, though there is less need for closing CSSP positions than there is in traditional speculative financial platforms
+* Each position refernces a single signal
+* The owner of a position can close a position at any time, though there is less need for closing CSSP positions than there is in a traditional speculative financial platform
   * CSSP positions only really needs to be closed when they are no longer needed and have become clutter
-
-### Balances
-
-* Each CSSP user has an account balance
-* The account balance is a numeric value
-* The account balance represents funds that user owns which are not tied to a position as collateral
-* Users can deposit and withdraw funds into their account balance
-* Users can move transfer funds from their account balance and into positions as collateral
-* In certain cases described below, the platform will transfer winnings to a users account balance
 
 ### Collateral
 
@@ -86,7 +70,7 @@
 
 * In a CSSP a losing party can never lose more than its collateral
 
-#### Short Collateral
+#### Negative Position Collateral
 
 * For traditional markets, The value of an asset cannot go below zero
 * Because of that lower limit, a positive position has a finite limit to its potential loss
@@ -94,17 +78,17 @@
 * Positive collateral is finite and quantifiable, making its collateral management simpler
 * Negative collateral is infinite and unquantifiable, making its collateral management more complex
 * While negative positions do not have inherent loss limits, their effective losses cannot exceed their collateral
-* A CSSP contains mechanisms to minimize excessive loss, further explained in later sections
+* A CSSP contains mechanisms to minimize excess loss, further explained in later sections
 
 #### Maximum and Actual Collateral
 
 * A CSSP position has two collateral properties:
   * The maximum collateral which is set by the position owner
   * The actual collateral which is dynamically managed by the platform software
-    * When this document refers to just *collateral* it is referring to *actual collateral*
+    * When this document refers to unqualified *collateral* it is referring to *actual collateral*
 * The actual collateral can never exceed the maximum collateral, but can be less than the maximum collateral
 * The owner of a position can adjust that position's maximum collateral at any time
-* If the maximum collateral is reduce below the actual collateral, the platform will transfer any actual collateral over the maximum to the user's account balance
+* If the maximum collateral is reduce below the actual collateral, the platform will transfer any actual collateral over the maximum to the user's wallet
 * If a user sets the maximum collateral of a position to zero then that position is effectively closed until the target collateral is increased
 * When the actual collateral of a position is zero then that position is considered "hibernating"
 
@@ -184,15 +168,15 @@
 
 ##### Payout
 
-* The payout process effectively transfers funds from losing positions collateral to either winning position collateral or user account balances
+* The payout process effectively transfers funds from losing positions collateral to either winning position collateral or user wallets
 * For each signal, total losses cannot exceed total winnings
 * Any excess losses remain in the collateral of losing positions
 * The first step in payout is to calculate the actual losses for each losing position
   * `actual_losses = adjusted_losses * min(total_winnings, total_adjusted_losses) / total_adjusted_losses `
-* When a position wins, its winnings are first used to fill its collateral to the the position's maximum collateral value, then any excess winnings are transferred to the user's account balance
+* When a position wins, its winnings are first used to fill its collateral to the the position's maximum collateral value, then any excess winnings are transferred to the user's wallets
   * `collateral_increase = min(max_collateral - collateral, winnings)`
   * `collateral = collateral + collateral_increase`
-  * `account_balance = account_balance + winnings - collateral_increase`
+  * `payout = winnings - collateral_increase`
 
 ### Inherent Behavior
 
