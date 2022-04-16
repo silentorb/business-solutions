@@ -186,7 +186,4 @@
     * Once a counter-position is opened, wins and losses will take effect
 * Since a CSSP is not based on trading or orders it is potentially less susceptible to slippage than traditional financial speculation platforms
   * A CSSP can still experience slippage depending on latency and signal sampling frequency
-* Unlike traditional financial speculation platforms, CSSP positions do not need stop loss orders
-  * The way CSSPs handle position collateral effectively acts as a stop loss order
-  * A feature similar to take profit orders would still be useful for CCSPs
 
