@@ -21,7 +21,7 @@
 * CSSP positions effectively have the benefits of leverage with far less risk of bankruptcy
 * CSSP position PnL is periodically resolved and at a relatively high frequency, making position bankruptcy unlikely
 * If a CSSP position does become bankrupt, that case is not as detremental as it is for perpetuals
-  * Since there are no virtual markets to balance, the worst-case-scenario for bankrupt CSSP positions is winning positions making smaller profits
+  * Since there are no virtual markets to balance, the worst-case-scenario for CSSP position bankruptcy is winning positions make smaller profits
     * This behavior is similar to auto-deleveraging but in a more fair and natural manner
 
 ## No Funding Payments
@@ -29,14 +29,14 @@
 * In order to synchronize the mark price with the index price, winning positions periodically pay losing positions
 * The less mentioned secondary purpose of funding payments is to incentive less attractive counter-positions
 * A CSSP does not have a mark price to synchronize
-* A CSSP has minimal dependence on counterparties
+* A CSSP has minimal dependence on counter-positions
 
 ## No Auto-Deleveraging
 
 * Due to leveraging and the rigid design of perpetual position state, perpetual platforms need secondary systems that pay debts of bankrupt positions with funds from profitable positions
 * Since a CSSP does not need leveraging, has more dynamic positions, and is continually realized, it does not need auto-deleveraging
 * The essence of auto-deleveraging inherently happens in a CSSP and in a more fair and balanced manner
-  * If a market dramatically shifts so that some positions lose everything, the winning positions don't need to be tapped for funds—they will simply have a smaller counter-pool and smaller profits
+  * If a market dramatically shifts so that some positions lose everything, the winning positions don't need to be directly tapped for funds—they will simply have a smaller counter-pool and smaller profits
 
 ## Automatic Risk Adjustment
 
