@@ -1,4 +1,4 @@
-# Benefits of CSSP over Current Perpetual Solutions
+# Benefits of CSSP over Perpetuals
 
 ## Positions Can Be Open Without Counter-positions or Liquidity
 
